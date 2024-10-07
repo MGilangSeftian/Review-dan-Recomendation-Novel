@@ -1,2 +1,0 @@
-print("Wildan");
-print("Coba");
