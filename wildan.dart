@@ -1,0 +1,2 @@
+print("Wildan");
+print("Coba");
