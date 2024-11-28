@@ -5,9 +5,9 @@ List<String> Kategori = [
   'Romantis',
   'Petualangan',
   'Inspiratif',
-  'Horor',
   'Aksi dan Drama',
   'Sejarah',
+  'Fantasi'
 ];
 
 List<Novel> novels = [
@@ -17,7 +17,7 @@ List<Novel> novels = [
       author: 'Tere Liye',
       tahun_terbit: '2018',
       penerbit: 'Yayasan Mitra Netral',
-      linkNovel : 'https://drive.google.com/file/d/13JN7FPq-qGBtansEDhqbfTgpglSqNEjl/view',
+      linkNovel : 'https://drive.google.com/file/d/1Myt7ukVg1aZ6beCp3K3y-PWc6bUWNYCM/view?usp=drive_link',
       synopsis: 'Novel ini menceritakan petualangan Raib, Seli, dan Ali yang melanjutkan perjalanan mereka di dunia paralel. Kali ini, mereka harus menghadapi tantangan yang lebih besar dan misterius di Klan Matahari.',
       review: 'Cerita yang disajikan sangat menarik dan penuh dengan kejutan. Alur yang rapi serta deskripsi yang mendalam membuat pembaca sulit berhenti membaca. Sangat direkomendasikan bagi pecinta cerita yang penuh intrik dan emosi.',
       kategori : 'Petualangan'
@@ -33,28 +33,19 @@ List<Novel> novels = [
       review: 'Sebuah novel yang menghangatkan hati, penuh dengan romansa dan nostalgia masa SMA. Karakter Dilan yang unik dan cerita yang ringan membuat novel ini mudah disukai oleh berbagai kalangan.',
       kategori : 'Romantis'
   ),
+
   Novel(
-      imageUrl: 'assets/images/LaskarPelangi.jpg',
-      title: 'Laskar Pelangi',
-      author: 'Andrea Hirata',
-      tahun_terbit: '2005',
-      penerbit: 'Bentang Pustaka',
-      linkNovel : 'https://drive.google.com/file/d/18RfpAbCKy306tvwqJsB5Gz2r4LTlEWO4/view',
-      synopsis: 'Laskar Pelangi menceritakan tentang sekelompok anak dari desa di Belitung yang berjuang demi mendapatkan pendidikan. Kisah ini sangat inspiratif, penuh harapan, dan mendorong untuk tidak menyerah pada keterbatasan.',
-      review: 'Buku yang sangat inspiratif dan mengajarkan kita tentang pentingnya pendidikan serta semangat pantang menyerah. Andrea Hirata berhasil menyampaikan pesan moral yang kuat melalui karakter anak-anak yang sederhana.',
-      kategori : 'Inspiratif'
-  ),
-  Novel(
-      imageUrl: 'assets/images/TentangKamu_TereLiye.jpg',
-      title: 'Tentang Kamu',
+      imageUrl: 'assets/images/selena_Tereliye.jpg',
+      title: 'Selena',
       author: 'Tere Liye',
-      tahun_terbit: '2016',
+      tahun_terbit: '2020',
       penerbit: 'Republika Penerbit',
-      linkNovel : 'https://drive.google.com/file/d/1m7H4nCyVqZlNw9Jy323WV2p1KgHL-6FK/view',
-      synopsis: 'Zam, seorang pengacara muda yang tinggal di London, mendapatkan tugas untuk menyelesaikan kasus warisan yang membawa dia ke berbagai negara. Dalam perjalanannya, ia menemukan kisah hidup yang luar biasa dari sosok bernama Sri Ningsih.',
-      review: 'Sebuah novel yang menyentuh dan memberikan banyak pelajaran hidup. Tere Liye berhasil menyampaikan kisah yang penuh makna, dengan latar cerita yang menarik dan emosional.',
-      kategori : 'Romantis'
+      linkNovel: 'https://drive.google.com/file/d/1w6pukLkBiVkhELX1SiPHgPv4qbcRwbKT/view?usp=drive_link',
+      synopsis: 'Selena menceritakan kisah gadis muda yang menjalani kehidupan di dunia paralel bernama Klan Bulan. Novel ini menghadirkan perjalanan penuh tantangan, pengorbanan, dan persahabatan yang begitu mendalam.',
+      review: 'Novel ini menawarkan petualangan seru dengan pesan mendalam tentang keberanian dan kasih sayang. Tere Liye berhasil membangun dunia fantasi yang memukau.',
+      kategori: 'Fantasi'
   ),
+
   Novel(
       imageUrl: 'assets/images/Pulang_TereLiye.jpg',
       title: 'Pulang',
