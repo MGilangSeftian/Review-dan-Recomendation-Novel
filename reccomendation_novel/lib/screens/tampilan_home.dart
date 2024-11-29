@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reccomendation_novel/data_list_novel/data_novel.dart';
 import 'package:reccomendation_novel/models_novel/novels_models.dart';
 import 'package:reccomendation_novel/widget/item_card.dart';
-// import 'package:reccomendation_novel/screens/tampilan_detail.dart';
+import 'package:reccomendation_novel/screens/tampilan_detail.dart';
 
 
 
@@ -141,12 +141,12 @@ class _TampilanHomeState extends State<TampilanHome> {
                   final novel = filterKategori[index];
                   return GestureDetector(
                     onTap: (){
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => TampilanDetail(novel: novels[index]),
-                      //     ),
-                      // );
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TampilanDetail(novel: novels[index]),
+                          ),
+                      );
                     },
                     child: ItemCard(novel: novel),
                   );
