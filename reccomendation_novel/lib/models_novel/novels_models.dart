@@ -8,6 +8,7 @@ class Novel {
   final String synopsis;
   final String review;
   final String kategori;
+  final double rating;
 
 
 
@@ -21,6 +22,7 @@ class Novel {
     required this.synopsis,
     required this.review,
     required this.kategori,
+    required this.rating,
 
   });
 }

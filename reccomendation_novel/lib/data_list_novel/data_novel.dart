@@ -20,7 +20,8 @@ List<Novel> novels = [
       linkNovel : 'https://drive.google.com/file/d/1Myt7ukVg1aZ6beCp3K3y-PWc6bUWNYCM/view?usp=drive_link',
       synopsis: 'Novel ini menceritakan petualangan Raib, Seli, dan Ali yang melanjutkan perjalanan mereka di dunia paralel. Kali ini, mereka harus menghadapi tantangan yang lebih besar dan misterius di Klan Matahari.',
       review: 'Cerita yang disajikan sangat menarik dan penuh dengan kejutan. Alur yang rapi serta deskripsi yang mendalam membuat pembaca sulit berhenti membaca. Sangat direkomendasikan bagi pecinta cerita yang penuh intrik dan emosi.',
-      kategori : 'Petualangan'
+      kategori : 'Petualangan',
+      rating: 4.5,
   ),
   Novel(
       imageUrl: 'assets/images/Dilan.jpg',
@@ -31,7 +32,8 @@ List<Novel> novels = [
       linkNovel : 'https://drive.google.com/file/d/18Ro5TIKdeztgaZX96Xg9EYELwMEuRUZS/view',
       synopsis: 'Novel ini mengisahkan perjalanan cinta remaja antara Dilan, seorang anak SMA yang unik dan penuh kejutan, dengan Milea, gadis pindahan dari Jakarta. Mereka mengalami masa-masa remaja yang penuh kenangan dan humor.',
       review: 'Sebuah novel yang menghangatkan hati, penuh dengan romansa dan nostalgia masa SMA. Karakter Dilan yang unik dan cerita yang ringan membuat novel ini mudah disukai oleh berbagai kalangan.',
-      kategori : 'Romantis'
+      kategori : 'Romantis',
+      rating : 4.5
   ),
 
   Novel(
@@ -43,7 +45,8 @@ List<Novel> novels = [
       linkNovel: 'https://drive.google.com/file/d/1w6pukLkBiVkhELX1SiPHgPv4qbcRwbKT/view?usp=drive_link',
       synopsis: 'Selena menceritakan kisah gadis muda yang menjalani kehidupan di dunia paralel bernama Klan Bulan. Novel ini menghadirkan perjalanan penuh tantangan, pengorbanan, dan persahabatan yang begitu mendalam.',
       review: 'Novel ini menawarkan petualangan seru dengan pesan mendalam tentang keberanian dan kasih sayang. Tere Liye berhasil membangun dunia fantasi yang memukau.',
-      kategori: 'Fantasi'
+      kategori: 'Fantasi',
+      rating: 4.0
   ),
 
   Novel(
@@ -55,7 +58,8 @@ List<Novel> novels = [
       linkNovel : 'https://drive.google.com/file/d/1MSK1x29dR8q0m0pir6ME0PobPSl__yEn/view',
       synopsis: 'Novel ini menceritakan tentang kehidupan seorang anak muda bernama Bujang yang tumbuh di dunia kriminal. Ia harus melalui berbagai cobaan hidup dan menemukan arti sebenarnya dari pulang.',
       review: 'Novel yang penuh dengan aksi dan emosional. Ceritanya menggugah pembaca untuk memikirkan nilai keluarga dan pengorbanan. Tere Liye menyajikan cerita yang mendalam dan sarat makna.',
-      kategori : 'Aksi dan Drama'
+      kategori : 'Aksi dan Drama',
+      rating: 4.3
   ),
   Novel(
       imageUrl: 'assets/images/Komet_TereLiye.jpg',
@@ -66,9 +70,9 @@ List<Novel> novels = [
       linkNovel : 'https://drive.google.com/file/d/1QJzJFqxh2w7tohAuyiHWDvmdzycvL2Fz/view',
       synopsis: 'Komet adalah bagian dari serial Bumi yang menceritakan petualangan Raib, Seli, dan Ali melintasi dunia paralel untuk mencari artefak penting yang akan membantu mereka melawan kekuatan jahat. Dalam perjalanan ini, mereka menghadapi tantangan yang menguji keberanian, kecerdasan, dan persahabatan mereka.',
       review: 'Komet adalah novel penuh petualangan dan misteri dengan karakter yang berkembang dengan baik. Tere Liye berhasil menciptakan dunia paralel yang menakjubkan, menjadikannya bacaan yang seru dan mendalam bagi pembaca muda dan dewasa.',
-      kategori : 'Petualangan'
+      kategori : 'Petualangan',
+      rating : 4.2
   ),
-
 
   Novel(
       imageUrl: 'assets/images/bumi_TereLiye.png',
@@ -79,7 +83,8 @@ List<Novel> novels = [
       linkNovel : 'https://drive.google.com/file/d/1kjNn7rETBUsjf3SR9O_fZFhnoaCgaAuS/view',
       synopsis: 'Bumi mengisahkan tentang Raib, seorang gadis yang memiliki kemampuan untuk menghilang. Bersama Seli yang bisa mengeluarkan listrik dan Ali yang cerdas, mereka memasuki dunia paralel dan mengalami petualangan penuh kejutan, yang mengungkapkan banyak rahasia besar tentang dunia mereka.',
       review: 'Bumi memberikan petualangan yang mendalam dengan sentuhan sains dan fantasi. Tere Liye menulis cerita ini dengan sangat menarik, menjadikannya sebuah buku yang wajib dibaca bagi penggemar genre fantasi di Indonesia.',
-      kategori : 'Petualangan'
+      kategori : 'Petualangan',
+      rating:4.4
   ),
 
 
@@ -92,7 +97,8 @@ List<Novel> novels = [
       linkNovel : 'https://drive.google.com/file/d/1CMyNBMIumAm9u8AK5slT6C9ve0s-qlSt/view',
       synopsis: 'Cinta dalam Ikhlas mengajak pembaca menyelami makna cinta yang tulus dan berserah diri kepada Sang Pencipta. Cerita ini membahas nilai keikhlasan dalam menjalani hubungan cinta dan bagaimana cinta yang tulus dan penuh iman bisa mempengaruhi hidup seseorang secara positif.',
       review: 'Novel ini memberikan inspirasi yang dalam tentang makna cinta dalam Islam. Kang Abay menyampaikan pesan cinta dengan bahasa yang lembut dan menyentuh hati, sangat cocok bagi pembaca yang mencari bacaan religius dan pencerahan spiritual.',
-      kategori : 'Romantis'
+      kategori : 'Romantis',
+      rating: 4.0,
   ),
 
   Novel(
@@ -104,7 +110,8 @@ List<Novel> novels = [
       linkNovel : 'https://drive.google.com/file/d/1XRXaMXYBHs8a0Xi-hc2rU7G5JIgJTIZK/view',
       synopsis: 'Buku ini mengisahkan kiprah Mohammad Natsir, seorang tokoh penting dalam sejarah politik Indonesia, yang menunjukkan etika dan keberanian dalam menjalankan perannya di bawah dua rezim yang berbeda. Natsir menampilkan nilai-nilai moral dan integritas dalam politik yang santun.',
       review: 'Sebagai seorang politisi yang tangguh dan santun, Natsir adalah inspirasi bagi banyak orang. Buku ini memberikan wawasan mendalam tentang peran politik yang berlandaskan nilai moral, sangat relevan untuk pembaca yang tertarik pada sejarah dan etika politik Indonesia.',
-      kategori : 'Sejarah'
+      kategori : 'Sejarah',
+      rating: 3.9
   ),
 
 ];
