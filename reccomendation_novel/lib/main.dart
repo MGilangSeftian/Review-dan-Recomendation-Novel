@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:reccomendation_novel/screens/tampilan_favotite.dart';
 import 'package:reccomendation_novel/screens/tampilan_home.dart';
-import 'package:reccomendation_novel/screens/tampilan_profile.dart';
+import 'package:reccomendation_novel/screens/tampilan_login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,8 +20,12 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      // home: TampilanHome(),
-      home: TampilanProfile(),
+      //home: TampilanHome(),
+      //home: TampilanProfile(),
+      //home: TampilanLogin(),
+      home: TampilanFavorit(),
+
+
     );
   }
 }
