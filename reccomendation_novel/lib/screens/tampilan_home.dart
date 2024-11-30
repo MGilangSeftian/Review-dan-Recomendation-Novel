@@ -48,7 +48,7 @@ class _TampilanHomeState extends State<TampilanHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.indigo,
         title:const Text('Home',
           style: TextStyle(
             color: Colors.black,
