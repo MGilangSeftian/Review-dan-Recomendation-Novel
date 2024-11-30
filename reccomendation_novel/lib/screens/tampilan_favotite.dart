@@ -11,17 +11,17 @@ class TampilanFavorit extends StatelessWidget {
     {
       "title": "Cinta Dalam Ikhlas",
       "author": "Kang Abay",
-      "image": "https://via.placeholder.com/150",
+      "image": " ",
     },
     {
       "title": "Bulan",
       "author": "Tere Liye",
-      "image": "https://via.placeholder.com/150",
+      "image": " ",
     },
     {
       "title": "Komet",
       "author": "Tere Liye",
-      "image": "https://via.placeholder.com/150",
+      "image": "  ",
     },
   ];
 
