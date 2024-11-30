@@ -22,10 +22,12 @@ class MyApp extends StatelessWidget {
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       //home: TampilanHome(),
       //home: TampilanProfile(),
-      //home: TampilanLogin(),
-      home: TampilanFavorit(),
+      home: TampilanLogin(),
+      //home: TampilanFavorit(),
 
 
     );
   }
 }
+
+
