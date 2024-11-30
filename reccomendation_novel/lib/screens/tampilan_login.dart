@@ -44,7 +44,7 @@ class _TampilanLoginState extends State<TampilanLogin> {
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.redAccent, Colors.black],
+                colors: [Colors.redAccent, Colors.blueGrey],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
@@ -63,7 +63,7 @@ class _TampilanLoginState extends State<TampilanLogin> {
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                       fontFamily: 'Arial',
                     ),
                   ),
@@ -72,7 +72,7 @@ class _TampilanLoginState extends State<TampilanLogin> {
                     'Explore the best novels and start your reading journey!',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.white70,
+                      color: Colors.black,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -83,9 +83,9 @@ class _TampilanLoginState extends State<TampilanLogin> {
                     controller: _emailController,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.white,
+                      fillColor: Colors.blueGrey,
                       hintText: 'Email',
-                      prefixIcon: Icon(Icons.email, color: Colors.pinkAccent),
+                      prefixIcon: Icon(Icons.email, color: Colors.black),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
@@ -100,9 +100,9 @@ class _TampilanLoginState extends State<TampilanLogin> {
                     controller: _passwordController,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.white,
+                      fillColor: Colors.blueGrey,
                       hintText: 'Password',
-                      prefixIcon: Icon(Icons.lock, color: Colors.pinkAccent),
+                      prefixIcon: Icon(Icons.lock, color: Colors.black),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none,
@@ -116,7 +116,7 @@ class _TampilanLoginState extends State<TampilanLogin> {
                   ElevatedButton(
                     onPressed: _login,
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.pinkAccent, backgroundColor: Colors.white,
+                      foregroundColor: Colors.black, backgroundColor: Colors.blueGrey,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -137,7 +137,7 @@ class _TampilanLoginState extends State<TampilanLogin> {
                     child: Text(
                       'Don\'t have an account? Sign up',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         decoration: TextDecoration.underline,
                       ),
                     ),
