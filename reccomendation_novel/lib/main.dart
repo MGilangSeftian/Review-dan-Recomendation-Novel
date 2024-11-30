@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:reccomendation_novel/screens/tampilan_favotite.dart';
 import 'package:reccomendation_novel/screens/tampilan_home.dart';
 import 'package:reccomendation_novel/screens/tampilan_login.dart';
+import 'package:reccomendation_novel/screens/tampilan_navigasiBar.dart';
+import 'package:reccomendation_novel/screens/tampilan_profile.dart';
 
 
 void main() {
@@ -24,8 +26,7 @@ class MyApp extends StatelessWidget {
       //home: TampilanHome(),
       //home: TampilanProfile(),
       home: TampilanLogin(),
-
-
+      home: TampilanNavigasibar(),
     );
   }
 }
