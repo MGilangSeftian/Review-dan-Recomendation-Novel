@@ -1,153 +1,181 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 class TampilanLogin extends StatefulWidget {
+  const TampilanLogin({super.key});
+
   @override
-  _TampilanLoginState createState() => _TampilanLoginState();
+  State<TampilanLogin> createState() => _LoginScreensState();
 }
 
-class _TampilanLoginState extends State<TampilanLogin> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class _LoginScreensState extends State<TampilanLogin> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  String _errorText = "";
+  bool _isSignIn = false;
+  bool _obscurePassword = true;
 
-  // Fungsi untuk menyimpan data ke SharedPreferences
-  Future<void> _saveLoginData(String email) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('email', email);
-  }
+  void _signin() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String savedEmail = prefs.getString('Email') ?? '';
+    final String savedUsername = prefs.getString('UserName') ?? '';
+    final String savedpassword = prefs.getString('Password') ?? '';
 
-  // Fungsi untuk menangani proses login
-  void _login() {
-    final email = _emailController.text.trim();
-    final password = _passwordController.text;
+    final String enteredEmail = _emailController.text.trim();
+    final String enteredpassword = _passwordController.text.trim();
 
-    if (email.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please fill in all fields')),
-      );
+
+    if (enteredEmail.isEmpty || enteredpassword.isEmpty) {
+      setState(() {
+        _errorText = 'Username atau password harus diisi';
+      });
+      return;
+    }
+    if (savedUsername.isEmpty || savedEmail.isEmpty || savedpassword.isEmpty) {
+      setState(() {
+        _errorText = 'Pengguna belum terdaftar';
+      });
       return;
     }
 
-    // Simpan data login
-    _saveLoginData(email);
-
-    // Navigasi ke halaman beranda
-    Navigator.pushReplacementNamed(context, '/home');
+    if ((enteredEmail == savedUsername || enteredEmail == savedEmail) &&
+        enteredpassword == savedpassword) {
+      setState(() {
+        _errorText = '';
+        _isSignIn = true;
+        prefs.setBool('isSignedIn', true);
+      });
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      });
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacementNamed(context, '/Main');
+      });
+    } else {
+      setState(() {
+        _errorText = 'Nama pengguna atau kata sandi salah';
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // Latar belakang gradasi
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.redAccent, Colors.blueGrey],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
-          ),
-          // Konten login
-          Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24.0),
+        appBar: AppBar(
+          title: const Text("Login"),
+          centerTitle: true,
+          backgroundColor: Colors.blue,
+          elevation: 0,
+        ),
+        body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Judul aplikasi
-                  Text(
-                    'Recommendation Novel',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontFamily: 'Arial',
-                    ),
+                  Image.asset("assets/images/Mobile_login.png"),
+                  const SizedBox(height: 16),
+                  const Text(
+                    "Login Detail",
+                    style: TextStyle(fontSize: 20),
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Explore the best novels and start your reading journey!',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 32),
-
-                  // Input email
+                  const SizedBox(height: 24),
                   TextField(
                     controller: _emailController,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.blueGrey,
-                      hintText: 'Email',
-                      prefixIcon: Icon(Icons.email, color: Colors.black),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
                     keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(width: 1.0, color: Colors.blue),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(width: 1.0, color: Colors.blue),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      hintText: "Username atau Email",
+                    ),
                   ),
-                  SizedBox(height: 16),
-
-                  // Input password
+                  const SizedBox(height: 16),
                   TextField(
                     controller: _passwordController,
+                    textInputAction: TextInputAction.done,
                     decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.blueGrey,
-                      hintText: 'Password',
-                      prefixIcon: Icon(Icons.lock, color: Colors.black),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(width: 1.0, color: Colors.blue),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(width: 1.0, color: Colors.blue),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _obscurePassword = !_obscurePassword;
+                          });
+                        },
+                        icon: Icon(
+                          _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                        ),
+                      ),
+                      hintText: "Password",
+                    ),
+                    obscureText: _obscurePassword,
+                  ),
+                  const SizedBox(height: 16),
+                  if (_errorText.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        _errorText,
+                        style: const TextStyle(color: Colors.red, fontSize: 12),
                       ),
                     ),
-                    obscureText: true,
-                  ),
-                  SizedBox(height: 24),
-
-                  // Tombol login
+                  const SizedBox(height: 24),
                   ElevatedButton(
-                    onPressed: _login,
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.black, backgroundColor: Colors.blueGrey,
+                      backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
-                      minimumSize: Size(double.infinity, 50),
                     ),
-                    child: Text(
-                      'Login',
-                      style: TextStyle(fontSize: 18),
+                    onPressed: _signin,
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: Text(
+                        "Login",
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
                     ),
                   ),
-                  SizedBox(height: 16),
-
-                  // Teks daftar
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/register');
-                    },
-                    child: Text(
-                      'Don\'t have an account? Sign up',
-                      style: TextStyle(
-                        color: Colors.black,
-                        decoration: TextDecoration.underline,
-                      ),
+                  const SizedBox(height: 24),
+                  RichText(
+                    text: TextSpan(
+                      text: "Belum Punya Akun? ",
+                      style: const TextStyle(fontSize: 16, color: Colors.blue),
+                      children: [
+                        TextSpan(
+                          text: "Daftar di sini",
+                          style: const TextStyle(
+                            color: Colors.deepPurple,
+                            decoration: TextDecoration.underline,
+                            fontSize: 16,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pushNamed(context, '/TampilanSignUp');
+                            },
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
+           ),
+        );
+   }
 }

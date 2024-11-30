@@ -3,6 +3,7 @@ import 'package:reccomendation_novel/screens/tampilan_favotite.dart';
 import 'package:reccomendation_novel/screens/tampilan_home.dart';
 import 'package:reccomendation_novel/screens/tampilan_login.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -23,7 +24,6 @@ class MyApp extends StatelessWidget {
       //home: TampilanHome(),
       //home: TampilanProfile(),
       home: TampilanLogin(),
-      //home: TampilanFavorit(),
 
 
     );
