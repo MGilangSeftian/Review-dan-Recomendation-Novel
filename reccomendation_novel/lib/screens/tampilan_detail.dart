@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reccomendation_novel/models_novel/novels_models.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TampilanDetail extends StatefulWidget {
@@ -11,6 +12,14 @@ class TampilanDetail extends StatefulWidget {
 }
 
 class _TampilanDetailState extends State<TampilanDetail> {
+
+  void _saveHistory(String title) async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> history = prefs.getStringList('history') ?? [];
+    history.add(title);
+    prefs.setStringList('history', history);
+  }
+
   @override
   Widget build(BuildContext context) {
     final novel = widget.novel;
@@ -142,6 +151,7 @@ class _TampilanDetailState extends State<TampilanDetail> {
               SizedBox(height: 8,),
               InkWell(
                 onTap: () async{
+                  _saveHistory(novel.title);
                   final Uri url = Uri.parse(novel.linkNovel);
                   if(await canLaunchUrl(url)){
                     await launchUrl(url);

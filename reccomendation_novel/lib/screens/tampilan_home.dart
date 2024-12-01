@@ -51,7 +51,7 @@ class _TampilanHomeState extends State<TampilanHome> {
         backgroundColor: Colors.indigo,
         title:const Text('Home',
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
