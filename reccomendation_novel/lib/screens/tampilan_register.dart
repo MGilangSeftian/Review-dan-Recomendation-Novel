@@ -107,8 +107,8 @@ class _RegissterScreensState extends State<TampilanRegister> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Image.asset("assets/images/Mobile_register.png",
-              width: 300,
-              height: 250),
+                  width: 300,
+                  height: 250),
               const SizedBox(height: 16,),
               Text("Register Detail",
                 style: TextStyle(fontSize: 20),
@@ -274,7 +274,7 @@ class _RegissterScreensState extends State<TampilanRegister> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: Text("Register",
-                      style: TextStyle(fontSize: 20, color: Colors.indigo)),
+                        style: TextStyle(fontSize: 20, color: Colors.indigo)),
                   )),
               const SizedBox(height: 24,),
               RichText(
