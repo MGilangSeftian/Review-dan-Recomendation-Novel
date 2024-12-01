@@ -24,9 +24,9 @@ class MyApp extends StatelessWidget {
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       // home: TampilanHome(),
-      //home: TampilanProfile(),
+      home: TampilanProfile(),
       // home: TampilanLogin(),
-       home: TampilanNavigasibar(),
+       // home: TampilanNavigasibar(),
     );
   }
 }
