@@ -166,7 +166,7 @@ class _LoginScreensState extends State<TampilanLogin> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Navigator.pushNamed(context, '/TampilanSignUp');
+                              Navigator.pushNamed(context, '/TampilanRegister');
                             },
                         ),
                       ],

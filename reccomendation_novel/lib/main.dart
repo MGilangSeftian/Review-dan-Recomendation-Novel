@@ -4,6 +4,7 @@ import 'package:reccomendation_novel/screens/tampilan_home.dart';
 import 'package:reccomendation_novel/screens/tampilan_login.dart';
 import 'package:reccomendation_novel/screens/tampilan_navigasiBar.dart';
 import 'package:reccomendation_novel/screens/tampilan_profile.dart';
+import 'package:reccomendation_novel/screens/tampilan_register.dart';
 
 
 void main() {
@@ -24,9 +25,17 @@ class MyApp extends StatelessWidget {
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       // home: TampilanHome(),
-      home: TampilanProfile(),
-      // home: TampilanLogin(),
+      // home: TampilanProfile(),
+       home: TampilanLogin(),
        // home: TampilanNavigasibar(),
+      // home: TampilanRegister(),
+      initialRoute: '/',
+      routes: {
+        '/Main' : (context) => const TampilanNavigasibar(),
+        '/TampilanHome' : (context) => const TampilanHome(),
+        '/TampilanLogin' : (context) =>const TampilanLogin(),
+        '/TampilanRegister' : (context) => const TampilanRegister(),
+      },
     );
   }
 }

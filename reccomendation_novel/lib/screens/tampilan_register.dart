@@ -164,7 +164,7 @@ class _RegissterScreensState extends State<TampilanRegister> {
                     focusedBorder: OutlineInputBorder(
                       borderSide: const BorderSide(
                           width: 1.0,
-                          color: Colors.red
+                          color: Colors.blue
                       ),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
