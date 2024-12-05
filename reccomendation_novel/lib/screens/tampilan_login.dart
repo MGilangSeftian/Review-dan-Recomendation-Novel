@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 
 class TampilanLogin extends StatefulWidget {
@@ -11,51 +12,103 @@ class TampilanLogin extends StatefulWidget {
 }
 
 class _LoginScreensState extends State<TampilanLogin> {
-  final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   String _errorText = "";
   bool _isSignIn = false;
   bool _obscurePassword = true;
 
+  Future<Map<String, String>> _retrieveAndDecryptDataFromPrefs(
+      SharedPreferences prefs) async {
+    final encryptedNamaLengkap = prefs.getString('NamaLengkap') ?? '';
+    final encryptedUsername = prefs.getString('UserName') ?? '';
+    final encryptedEmail = prefs.getString('Email') ?? '';
+    final encryptedPassword = prefs.getString('Password') ?? '';
+    final keyString = prefs.getString('key') ?? '';
+    final ivString = prefs.getString('iv') ?? '';
+
+    if (encryptedNamaLengkap.isEmpty ||
+        encryptedUsername.isEmpty ||
+        encryptedEmail.isEmpty ||
+        encryptedPassword.isEmpty ||
+        keyString.isEmpty ||
+        ivString.isEmpty) {
+      return {};
+    }
+
+    try {
+      final key = encrypt.Key.fromBase64(keyString);
+      final iv = encrypt.IV.fromBase64(ivString);
+      final encrypter = encrypt.Encrypter(encrypt.AES(key));
+
+      final decryptedNamaLengkap =
+      encrypter.decrypt64(encryptedNamaLengkap, iv: iv);
+      final decryptedUsername = encrypter.decrypt64(encryptedUsername, iv: iv);
+      final decryptedEmail = encrypter.decrypt64(encryptedEmail, iv: iv);
+      final decryptedPassword = encrypter.decrypt64(encryptedPassword, iv: iv);
+
+      return {
+        'NamaLengkap': decryptedNamaLengkap,
+        'UserName': decryptedUsername,
+        'Email': decryptedEmail,
+        'Password': decryptedPassword,
+      };
+    } catch (e) {
+      return {};
+    }
+  }
+
   void _signin() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String savedEmail = prefs.getString('Email') ?? '';
-    final String savedUsername = prefs.getString('UserName') ?? '';
-    final String savedpassword = prefs.getString('Password') ?? '';
+    final String userNameOrEmail = _usernameController.text.trim();
+    final String password = _passwordController.text.trim();
 
-    final String enteredEmail = _emailController.text.trim();
-    final String enteredpassword = _passwordController.text.trim();
+    setState(() {
+      _errorText = '';
+    });
 
-
-    if (enteredEmail.isEmpty || enteredpassword.isEmpty) {
+    if (userNameOrEmail.isEmpty || password.isEmpty) {
       setState(() {
-        _errorText = 'Username atau password harus diisi';
-      });
-      return;
-    }
-    if (savedUsername.isEmpty || savedEmail.isEmpty || savedpassword.isEmpty) {
-      setState(() {
-        _errorText = 'Pengguna belum terdaftar';
+        _errorText = "Username/Email dan Password tidak boleh kosong.";
       });
       return;
     }
 
-    if ((enteredEmail == savedUsername || enteredEmail == savedEmail) &&
-        enteredpassword == savedpassword) {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final data = await _retrieveAndDecryptDataFromPrefs(prefs);
+
+      if (data.isNotEmpty) {
+        final decryptedUsername = data['UserName'];
+        final decryptedPassword = data['Password'];
+        final decryptedEmail = data['Email'];
+
+        if ((userNameOrEmail == decryptedUsername ||
+            userNameOrEmail == decryptedEmail) &&
+            password == decryptedPassword) {
+          setState(() {
+            _errorText = '';
+          });
+
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Navigator.of(context).popUntil((route) => route.isFirst);
+          });
+
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Navigator.pushReplacementNamed(context, '/Main');
+          });
+        } else {
+          setState(() {
+            _errorText = "Username/Email atau Password salah.";
+          });
+        }
+      } else {
+        setState(() {
+          _errorText = "Data pengguna tidak ditemukan. Silakan daftar terlebih dahulu.";
+        });
+      }
+    } catch (e) {
       setState(() {
-        _errorText = '';
-        _isSignIn = true;
-        prefs.setBool('isSignedIn', true);
-      });
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.of(context).popUntil((route) => route.isFirst);
-      });
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushReplacementNamed(context, '/Main');
-      });
-    } else {
-      setState(() {
-        _errorText = 'Nama pengguna atau kata sandi salah';
+        _errorText = "Terjadi kesalahan saat login. Coba lagi.";
       });
     }
   }
@@ -83,7 +136,7 @@ class _LoginScreensState extends State<TampilanLogin> {
                   ),
                   const SizedBox(height: 24),
                   TextField(
-                    controller: _emailController,
+                    controller: _usernameController,
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
@@ -177,5 +230,5 @@ class _LoginScreensState extends State<TampilanLogin> {
             ),
            ),
         );
-   }
+  }
 }
