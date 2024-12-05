@@ -20,6 +20,7 @@ class _LoginScreensState extends State<TampilanLogin> {
   void _signin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String savedEmail = prefs.getString('Email') ?? '';
+    final String savedNamalengkap = prefs.getString('NamaLengkap') ?? '';
     final String savedUsername = prefs.getString('UserName') ?? '';
     final String savedpassword = prefs.getString('Password') ?? '';
 

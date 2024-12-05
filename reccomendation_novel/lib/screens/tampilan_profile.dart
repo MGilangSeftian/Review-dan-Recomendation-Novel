@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reccomendation_novel/screens/tampilan_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -11,8 +12,21 @@ class TampilanProfile extends StatefulWidget {
 
 class _TampilanProfileState extends State<TampilanProfile> {
 
-  // Daftar history yang akan ditampilkan di pop-up
   List<String> history = [];
+
+
+  String _NamaLengkap = '';
+  String _UserName = '';
+  String _Email = '';
+
+  Future<void> getUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _NamaLengkap = prefs.getString('NamaLengkap') ?? 'Tidak Ada Nama Pengguna';
+      _UserName = prefs.getString('UserName') ?? 'Tidak Ada Nama Lengkap';
+      _Email = prefs.getString('Email') ?? 'Tidak Ada Nama Lengkap';
+    });
+  }
 
   void _loadHistory() async {
     final prefs = await SharedPreferences.getInstance();
@@ -21,7 +35,6 @@ class _TampilanProfileState extends State<TampilanProfile> {
     });
   }
 
-  // Fungsi untuk menampilkan pop-up dialog dengan daftar history
   void _showHistoryDialog() {
     showDialog(
       context: context,
@@ -92,9 +105,20 @@ class _TampilanProfileState extends State<TampilanProfile> {
     );
   }
 
+  Future<void> _logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+
+    Navigator.pushReplacement(context,
+      MaterialPageRoute(builder: (context) => TampilanLogin()),
+    );
+  }
+
+
   @override
   void initState(){
     super.initState();
+    getUserData();
     _loadHistory();
   }
 
@@ -108,6 +132,7 @@ class _TampilanProfileState extends State<TampilanProfile> {
           'Profil',
           style: TextStyle(
             color: Colors.white,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -137,14 +162,14 @@ class _TampilanProfileState extends State<TampilanProfile> {
                     iconSize: 30,
                   ),
                   const SizedBox(height: 20),
-                  const Text('Nama Pengguna',
+                  Text(_UserName,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 5),
-                  const Text('example@gmail.com',
+                  Text(_Email,
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey,
@@ -156,7 +181,7 @@ class _TampilanProfileState extends State<TampilanProfile> {
                     thickness: 1,
                   ),
                   const SizedBox(height: 20),
-                  const Text('Nama Lengkap',
+                  Text(_NamaLengkap,
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.indigo,
@@ -167,7 +192,7 @@ class _TampilanProfileState extends State<TampilanProfile> {
                   Container(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _logout,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.indigo,
                         padding: const EdgeInsets.symmetric(vertical: 15),

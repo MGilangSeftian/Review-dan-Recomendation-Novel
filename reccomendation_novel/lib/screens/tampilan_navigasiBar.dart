@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:reccomendation_novel/screens/tampilan_favotite.dart';
+import 'package:reccomendation_novel/screens/tampilan_favorite.dart';
 import 'package:reccomendation_novel/screens/tampilan_home.dart';
 import 'package:reccomendation_novel/screens/tampilan_profile.dart';
 
@@ -16,7 +16,7 @@ class _TampilanNavigasibarState extends State<TampilanNavigasibar> {
 
   final List<Widget> _TampilanScreens = [
     TampilanHome(),
-    TampilanFavotite(),
+    TampilanFavorite(),
     TampilanProfile(),
   ];
 

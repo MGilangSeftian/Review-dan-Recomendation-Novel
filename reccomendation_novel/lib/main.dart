@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reccomendation_novel/screens/tampilan_favotite.dart';
+import 'package:reccomendation_novel/screens/tampilan_favorite.dart';
 import 'package:reccomendation_novel/screens/tampilan_home.dart';
 import 'package:reccomendation_novel/screens/tampilan_login.dart';
 import 'package:reccomendation_novel/screens/tampilan_navigasiBar.dart';
@@ -26,9 +26,9 @@ class MyApp extends StatelessWidget {
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       // home: TampilanHome(),
       // home: TampilanProfile(),
-       home: TampilanLogin(),
+      // home: TampilanLogin(),
        // home: TampilanNavigasibar(),
-      // home: TampilanRegister(),
+       home: TampilanRegister(),
       initialRoute: '/',
       routes: {
         '/Main' : (context) => const TampilanNavigasibar(),
