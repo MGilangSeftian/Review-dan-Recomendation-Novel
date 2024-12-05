@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:reccomendation_novel/screens/tampilan_register.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 class TampilanRegister extends StatefulWidget {
   const TampilanRegister({super.key});
@@ -75,10 +76,24 @@ class _RegissterScreensState extends State<TampilanRegister> {
     if(hasError){
       return;
     }
-    prefs.setString('NamaLengkap', NamaLengkap);
-    prefs.setString('UserName', UserName);
-    prefs.setString('Email', Email);
-    prefs.setString('Password', Password);
+    if (NamaLengkap.isNotEmpty && UserName.isNotEmpty && Email.isNotEmpty && Password.isNotEmpty){
+      final encrypt.Key key = encrypt.Key.fromLength(32);
+      final iv = encrypt.IV.fromLength(16);
+
+      final encrypter = encrypt.Encrypter(encrypt.AES(key));
+      final encryptedNamaLengkap = encrypter.encrypt(NamaLengkap, iv: iv);
+      final encryptedUsername = encrypter.encrypt(UserName, iv: iv);
+      final encryptedEmail = encrypter.encrypt(Email, iv: iv);
+      final encryptedPassword = encrypter.encrypt(Password, iv: iv);
+
+
+      prefs.setString('NamaLengkap', encryptedNamaLengkap.base64);
+      prefs.setString('UserName', encryptedUsername.base64);
+      prefs.setString('Email', encryptedEmail.base64);
+      prefs.setString('Password', encryptedPassword.base64);
+      prefs.setString ('key', key.base64);
+      prefs.setString ('iv', iv.base64);
+    }
 
     Navigator.pushReplacementNamed(context, '/TampilanLogin');
   }
