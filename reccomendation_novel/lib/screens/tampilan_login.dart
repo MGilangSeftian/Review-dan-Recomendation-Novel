@@ -18,6 +18,7 @@ class _LoginScreensState extends State<TampilanLogin> {
   bool _isSignIn = false;
   bool _obscurePassword = true;
 
+
   Future<Map<String, String>> _retrieveAndDecryptDataFromPrefs(
       SharedPreferences prefs) async {
     final encryptedNamaLengkap = prefs.getString('NamaLengkap') ?? '';
@@ -26,6 +27,14 @@ class _LoginScreensState extends State<TampilanLogin> {
     final encryptedPassword = prefs.getString('Password') ?? '';
     final keyString = prefs.getString('key') ?? '';
     final ivString = prefs.getString('iv') ?? '';
+
+  void _signin() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String savedEmail = prefs.getString('Email') ?? '';
+    final String savedNamalengkap = prefs.getString('NamaLengkap') ?? '';
+    final String savedUsername = prefs.getString('UserName') ?? '';
+    final String savedpassword = prefs.getString('Password') ?? '';
+
 
     if (encryptedNamaLengkap.isEmpty ||
         encryptedUsername.isEmpty ||

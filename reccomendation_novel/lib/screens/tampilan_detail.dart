@@ -13,6 +13,39 @@ class TampilanDetail extends StatefulWidget {
 
 class _TampilanDetailState extends State<TampilanDetail> {
 
+  bool isFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkFavoriteStatus();
+  }
+
+  Future<void> _checkFavoriteStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> favorite = prefs.getStringList('favorite') ?? [];
+    setState(() {
+      isFavorite = favorite.contains(widget.novel.title);
+    });
+  }
+
+  Future<void> _saveFavorite(String title) async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> favorite = prefs.getStringList('favorite') ?? [];
+
+    if (favorite.contains(title)) {
+      favorite.remove(title);
+    } else {
+      favorite.add(title);
+    }
+
+    await prefs.setStringList('favorite', favorite);
+
+    setState(() {
+      isFavorite = favorite.contains(title);
+    });
+  }
+
   void _saveHistory(String title) async {
     final prefs = await SharedPreferences.getInstance();
     List<String> history = prefs.getStringList('history') ?? [];
@@ -80,8 +113,11 @@ class _TampilanDetailState extends State<TampilanDetail> {
                   Column(
                     children: [
                       IconButton(
-                          onPressed: (){},
-                          icon: Icon(Icons.favorite_border),
+                          onPressed: () => _saveFavorite(novel.title),
+                          icon: Icon(
+                              isFavorite ? Icons.favorite : Icons.favorite_border,
+                              color: isFavorite ? Colors.red : null
+                          ),
                       ),
                     ],
                   )
