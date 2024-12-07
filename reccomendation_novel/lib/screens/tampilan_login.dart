@@ -28,13 +28,6 @@ class _LoginScreensState extends State<TampilanLogin> {
     final keyString = prefs.getString('key') ?? '';
     final ivString = prefs.getString('iv') ?? '';
 
-  void _signin() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String savedEmail = prefs.getString('Email') ?? '';
-    final String savedNamalengkap = prefs.getString('NamaLengkap') ?? '';
-    final String savedUsername = prefs.getString('UserName') ?? '';
-    final String savedpassword = prefs.getString('Password') ?? '';
-
 
     if (encryptedNamaLengkap.isEmpty ||
         encryptedUsername.isEmpty ||
@@ -201,7 +194,7 @@ class _LoginScreensState extends State<TampilanLogin> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.0),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     onPressed: _signin,

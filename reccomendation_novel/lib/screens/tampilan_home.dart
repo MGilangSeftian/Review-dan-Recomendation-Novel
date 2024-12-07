@@ -144,7 +144,7 @@ class _TampilanHomeState extends State<TampilanHome> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TampilanDetail(novel: novels[index]),
+                              builder: (context) => TampilanDetail(novel: filterKategori[index]),
                           ),
                       );
                     },

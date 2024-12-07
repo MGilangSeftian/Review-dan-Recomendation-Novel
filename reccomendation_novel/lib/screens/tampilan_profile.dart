@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reccomendation_novel/screens/tampilan_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 
 class TampilanProfile extends StatefulWidget {
@@ -21,11 +22,42 @@ class _TampilanProfileState extends State<TampilanProfile> {
 
   Future<void> getUserData() async {
     final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _NamaLengkap = prefs.getString('NamaLengkap') ?? 'Tidak Ada Nama Pengguna';
-      _UserName = prefs.getString('UserName') ?? 'Tidak Ada Nama Lengkap';
-      _Email = prefs.getString('Email') ?? 'Tidak Ada Nama Lengkap';
-    });
+
+    final encryptedNamaLengkap = prefs.getString('NamaLengkap') ?? '';
+    final encryptedUsername = prefs.getString('UserName') ?? '';
+    final encryptedEmail = prefs.getString('Email') ?? '';
+    final keyString = prefs.getString('key') ?? '';
+    final ivString = prefs.getString('iv') ?? '';
+
+    if (encryptedNamaLengkap.isNotEmpty &&
+        encryptedUsername.isNotEmpty &&
+        encryptedEmail.isNotEmpty &&
+        keyString.isNotEmpty &&
+        ivString.isNotEmpty) {
+      try {
+        final key = encrypt.Key.fromBase64(keyString);
+        final iv = encrypt.IV.fromBase64(ivString);
+        final encrypter = encrypt.Encrypter(encrypt.AES(key));
+
+        setState(() {
+          _NamaLengkap = encrypter.decrypt64(encryptedNamaLengkap, iv: iv);
+          _UserName = encrypter.decrypt64(encryptedUsername, iv: iv);
+          _Email = encrypter.decrypt64(encryptedEmail, iv: iv);
+        });
+      } catch (e) {
+        setState(() {
+          _NamaLengkap = 'Dekripsi gagal';
+          _UserName = 'Dekripsi gagal';
+          _Email = 'Dekripsi gagal';
+        });
+      }
+    } else {
+      setState(() {
+        _NamaLengkap = 'Data tidak tersedia';
+        _UserName = 'Data tidak tersedia';
+        _Email = 'Data tidak tersedia';
+      });
+    }
   }
 
   void _loadHistory() async {
@@ -106,9 +138,6 @@ class _TampilanProfileState extends State<TampilanProfile> {
   }
 
   Future<void> _logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
-
     Navigator.pushReplacement(context,
       MaterialPageRoute(builder: (context) => TampilanLogin()),
     );
@@ -220,7 +249,7 @@ class _TampilanProfileState extends State<TampilanProfile> {
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.indigo,
-                borderRadius: BorderRadius.circular(12)
+                borderRadius: BorderRadius.circular(5.0)
               ),
               child: IconButton(
                 onPressed: _showHistoryDialog,
