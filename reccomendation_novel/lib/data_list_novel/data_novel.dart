@@ -4,7 +4,6 @@ List<String> Kategori = [
   'Semua',
   'Romantis',
   'Petualangan',
-  'Inspiratif',
   'Aksi dan Drama',
   'Sejarah',
   'Fantasi'

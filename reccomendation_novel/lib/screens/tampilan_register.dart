@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:reccomendation_novel/screens/tampilan_login.dart';
 import 'package:reccomendation_novel/screens/tampilan_register.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
@@ -311,7 +312,7 @@ class _RegissterScreensState extends State<TampilanRegister> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        TampilanRegister()),
+                                        TampilanLogin()),
                               );
                             }
                       ),

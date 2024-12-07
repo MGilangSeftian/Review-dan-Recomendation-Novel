@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Review dan Recommendation Novel',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -26,9 +26,9 @@ class MyApp extends StatelessWidget {
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       // home: TampilanHome(),
       // home: TampilanProfile(),
-      // home: TampilanLogin(),
+       home: TampilanLogin(),
        // home: TampilanNavigasibar(),
-       home: TampilanRegister(),
+       // home: TampilanRegister(),
       initialRoute: '/',
       routes: {
         '/Main' : (context) => const TampilanNavigasibar(),
