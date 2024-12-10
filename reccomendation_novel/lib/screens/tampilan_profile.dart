@@ -1,8 +1,11 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:reccomendation_novel/screens/tampilan_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
-
+import 'dart:io' show File;
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class TampilanProfile extends StatefulWidget {
   const TampilanProfile({super.key});
@@ -12,9 +15,74 @@ class TampilanProfile extends StatefulWidget {
 }
 
 class _TampilanProfileState extends State<TampilanProfile> {
+  String _imageFile = '';
+  final picker = ImagePicker();
+
+  Future<void> _getImage(ImageSource source) async {
+    if (kIsWeb && source == ImageSource.camera) {
+      debugPrint('Kamera tidak didukung di Web. Gunakan perangkat fisik.');
+      return;
+    }
+
+    try {
+      final pickedFile = await picker.pickImage(
+          source: source,
+          maxHeight: 720,
+          maxWidth: 720,
+          imageQuality: 80
+      );
+      if (pickedFile != null) {
+        setState(() {
+          _imageFile = pickedFile.path;
+          debugPrint('File path: $_imageFile');
+        });
+      } else {
+        debugPrint('No image selected.');
+      }
+    } catch (e) {
+      debugPrint('Error picking imageL $e');
+    }
+  }
+
+  void _showPicker() {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            color: Colors.indigo[50],
+            child: Wrap(
+              children: [
+                ListTile(
+                  leading: const Icon(
+                    Icons.camera,
+                    color: Colors.indigo
+                  ),
+                  title: const Text('Camera'),
+                  onTap: (){
+                    debugPrint('Kamera dipanggil');
+                    Navigator.of(context).pop();
+                    _getImage(ImageSource.camera);
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                      Icons.photo_library,
+                      color: Colors.indigo
+                  ),
+                  title: const Text('Gallery'),
+                  onTap: (){
+                    Navigator.of(context).pop();
+                    _getImage(ImageSource.gallery);
+                  },
+                ),
+              ],
+            ),
+          );
+        }
+    );
+  }
 
   List<String> history = [];
-
 
   String _NamaLengkap = '';
   String _UserName = '';
@@ -22,7 +90,6 @@ class _TampilanProfileState extends State<TampilanProfile> {
 
   Future<void> getUserData() async {
     final prefs = await SharedPreferences.getInstance();
-
     final encryptedNamaLengkap = prefs.getString('NamaLengkap') ?? '';
     final encryptedUsername = prefs.getString('UserName') ?? '';
     final encryptedEmail = prefs.getString('Email') ?? '';
@@ -180,12 +247,16 @@ class _TampilanProfileState extends State<TampilanProfile> {
                     ),
                     child: CircleAvatar(
                       radius: 50,
-                      backgroundImage: AssetImage('assets/images/person.png'),
+                      backgroundImage: _imageFile.isNotEmpty
+                        ? (kIsWeb
+                          ? NetworkImage(_imageFile)
+                          : FileImage(File(_imageFile))) as ImageProvider
+                        : AssetImage('assets/images/person.png'),
                     ),
                   ),
                   const SizedBox(height: 10),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: _showPicker,
                     icon: Icon(Icons.camera_alt),
                     color: Colors.indigo,
                     iconSize: 30,

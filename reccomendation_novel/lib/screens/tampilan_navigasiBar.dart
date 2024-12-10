@@ -61,14 +61,14 @@ class _TampilanNavigasibarState extends State<TampilanNavigasibar> {
                           },
                           child: Padding(
                             padding: EdgeInsets.only(
-                              top: index == currentIndex ? 0 : 30,
+                              top: index == currentIndex ? 15 : 30,
                           ),
                             child: Icon(
                               listIcons[index],
                               color: index == currentIndex
                                   ? Colors.deepPurple[100]
                                   : Colors.white,
-                              size: index == currentIndex ? 40 : 30,
+                              size: index == currentIndex ? 35 : 30,
                             ),
                           ),
                         ),
