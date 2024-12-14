@@ -18,6 +18,18 @@ class _TampilanProfileState extends State<TampilanProfile> {
   String _imageFile = '';
   final picker = ImagePicker();
 
+  Future<void> _saveImage() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('imagePath', _imageFile);
+  }
+  Future<void> _loadImage() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _imageFile = prefs.getString('imagePath') ?? '';
+    });
+  }
+
+
   Future<void> _getImage(ImageSource source) async {
     if (kIsWeb && source == ImageSource.camera) {
       debugPrint('Kamera tidak didukung di Web. Gunakan perangkat fisik.');
@@ -34,13 +46,13 @@ class _TampilanProfileState extends State<TampilanProfile> {
       if (pickedFile != null) {
         setState(() {
           _imageFile = pickedFile.path;
-          debugPrint('File path: $_imageFile');
         });
+        _saveImage();
       } else {
         debugPrint('No image selected.');
       }
     } catch (e) {
-      debugPrint('Error picking imageL $e');
+      
     }
   }
 
@@ -216,6 +228,7 @@ class _TampilanProfileState extends State<TampilanProfile> {
     super.initState();
     getUserData();
     _loadHistory();
+    _loadImage();
   }
 
 
