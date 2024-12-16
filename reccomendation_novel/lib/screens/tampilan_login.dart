@@ -143,7 +143,7 @@ class _LoginScreensState extends State<TampilanLogin> {
                     textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(width: 1.0, color: Colors.blue),
+                        borderSide: const BorderSide(width: 1.0, color: Colors.blueAccent),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       focusedBorder: OutlineInputBorder(
