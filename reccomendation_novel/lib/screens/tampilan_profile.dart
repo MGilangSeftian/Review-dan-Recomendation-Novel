@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'dart:io' show File;
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:reccomendation_novel/screens/tampilan_camera.dart';
 
 class TampilanProfile extends StatefulWidget {
   const TampilanProfile({super.key});
@@ -52,7 +53,6 @@ class _TampilanProfileState extends State<TampilanProfile> {
         debugPrint('No image selected.');
       }
     } catch (e) {
-      
     }
   }
 
@@ -67,13 +67,24 @@ class _TampilanProfileState extends State<TampilanProfile> {
                 ListTile(
                   leading: const Icon(
                     Icons.camera,
-                    color: Colors.indigo
+                    color: Colors.indigo,
                   ),
                   title: const Text('Camera'),
-                  onTap: (){
-                    debugPrint('Kamera dipanggil');
+                  onTap: () {
                     Navigator.of(context).pop();
-                    _getImage(ImageSource.camera);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const TampilanCamera()),
+                    ).then((capturedImageUrl) {
+                      if (capturedImageUrl != null) {
+                        setState(() {
+                          _imageFile = capturedImageUrl;
+                        });
+                        _saveImage();
+                      } else {
+                        debugPrint('Tidak ada gambar yang diambil.');
+                      }
+                    });
                   },
                 ),
                 ListTile(
@@ -261,10 +272,10 @@ class _TampilanProfileState extends State<TampilanProfile> {
                     child: CircleAvatar(
                       radius: 50,
                       backgroundImage: _imageFile.isNotEmpty
-                        ? (kIsWeb
+                          ? (kIsWeb
                           ? NetworkImage(_imageFile)
                           : FileImage(File(_imageFile))) as ImageProvider
-                        : AssetImage('assets/images/person.png'),
+                          : AssetImage('assets/images/person.png'),
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -332,8 +343,8 @@ class _TampilanProfileState extends State<TampilanProfile> {
             right: 10,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.indigo,
-                borderRadius: BorderRadius.circular(5.0)
+                  color: Colors.indigo,
+                  borderRadius: BorderRadius.circular(5.0)
               ),
               child: IconButton(
                 onPressed: _showHistoryDialog,
